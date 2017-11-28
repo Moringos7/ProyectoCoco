@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -14,16 +14,13 @@ using Modelos;
 // [System.Web.Script.Services.ScriptService]
 public class WebService : System.Web.Services.WebService {
     ControladorOrden ControladorOrden;
+    ControladorPlatillo ControladorPlatillo;
     public WebService () {
 
         //Elimine la marca de comentario de la línea siguiente si utiliza los componentes diseñados 
         //InitializeComponent(); 
         ControladorOrden = new ControladorOrden();
-    }
-
-    [WebMethod]
-    public string HelloWorld() {
-        return "Hola a todos";
+        ControladorPlatillo = new ControladorPlatillo();
     }
     //CREAR ORDEN
     [WebMethod]
@@ -59,5 +56,41 @@ public class WebService : System.Web.Services.WebService {
     public void BorrarOrden(int PkOrden)
     {
         ControladorOrden.BorrarOrden(PkOrden);
+    }
+
+    //CREAR Platillo
+    [WebMethod]
+    public void CrearPlatillo(String Nombre, decimal Precio)
+    {
+        Platillo Platillo = new Platillo()
+        {
+            Nombre = Nombre,
+            Precio = Precio
+        };
+        ControladorPlatillo.CrearPlatillo(Platillo);
+    }
+    //READ Platillo
+    public List<Platillo> DevolverTablaPlatillo()
+    {
+        List<Platillo> TablaPlatillo = new List<Platillo>();
+        TablaPlatillo = ControladorPlatillo.DevolverTablaPlatillo();
+        return TablaPlatillo;
+    }
+    //UPDATE Platillo
+    [WebMethod]
+    public void ModificarPlatillo(int PkPlatillo, String Nombre, decimal Precio)
+    {
+        Platillo Platillo = new Platillo()
+        {
+            Nombre = Nombre,
+            Precio = Precio
+        };
+        ControladorPlatillo.ModificarPlatillo(PkPlatillo, Platillo);
+    }
+    //DELETE Platillo
+    [WebMethod]
+    public void BorrarPlatillo(int PkPlatillo)
+    {
+        ControladorPlatillo.BorrarPlatillo(PkPlatillo);
     }
 }
