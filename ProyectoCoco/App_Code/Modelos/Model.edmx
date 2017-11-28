@@ -1,0 +1,205 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="CafeteriaPacoModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="CafeteriaPacoModelStoreContainer">
+          <EntitySet Name="Orden" EntityType="CafeteriaPacoModel.Store.Orden" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Pedido" EntityType="CafeteriaPacoModel.Store.Pedido" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Platillo" EntityType="CafeteriaPacoModel.Store.Platillo" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_Pedido_Orden" Association="CafeteriaPacoModel.Store.FK_Pedido_Orden">
+            <End Role="Orden" EntitySet="Orden" />
+            <End Role="Pedido" EntitySet="Pedido" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pedido_Platillo" Association="CafeteriaPacoModel.Store.FK_Pedido_Platillo">
+            <End Role="Platillo" EntitySet="Platillo" />
+            <End Role="Pedido" EntitySet="Pedido" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Orden">
+          <Key>
+            <PropertyRef Name="PkOrden" />
+          </Key>
+          <Property Name="PkOrden" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Mesa" Type="int" Nullable="false" />
+          <Property Name="Fecha" Type="date" Nullable="false" />
+          <Property Name="Total" Type="float" />
+        </EntityType>
+        <EntityType Name="Pedido">
+          <Key>
+            <PropertyRef Name="PkPedido" />
+          </Key>
+          <Property Name="PkPedido" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Platillo" Type="int" Nullable="false" />
+          <Property Name="Orden" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Platillo">
+          <Key>
+            <PropertyRef Name="PkPlatillo" />
+          </Key>
+          <Property Name="PkPlatillo" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="Precio" Type="money" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Pedido_Orden">
+          <End Role="Orden" Type="CafeteriaPacoModel.Store.Orden" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Pedido" Type="CafeteriaPacoModel.Store.Pedido" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orden">
+              <PropertyRef Name="PkOrden" />
+            </Principal>
+            <Dependent Role="Pedido">
+              <PropertyRef Name="Orden" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pedido_Platillo">
+          <End Role="Platillo" Type="CafeteriaPacoModel.Store.Platillo" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Pedido" Type="CafeteriaPacoModel.Store.Pedido" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Platillo">
+              <PropertyRef Name="PkPlatillo" />
+            </Principal>
+            <Dependent Role="Pedido">
+              <PropertyRef Name="Platillo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CafeteriaPacoModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="CafeteriaPacoEntities" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="Orden" EntityType="CafeteriaPacoModel.Orden" />
+          <EntitySet Name="Pedido" EntityType="CafeteriaPacoModel.Pedido" />
+          <EntitySet Name="Platillo" EntityType="CafeteriaPacoModel.Platillo" />
+          <AssociationSet Name="FK_Pedido_Orden" Association="CafeteriaPacoModel.FK_Pedido_Orden">
+            <End Role="Orden" EntitySet="Orden" />
+            <End Role="Pedido" EntitySet="Pedido" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pedido_Platillo" Association="CafeteriaPacoModel.FK_Pedido_Platillo">
+            <End Role="Platillo" EntitySet="Platillo" />
+            <End Role="Pedido" EntitySet="Pedido" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Orden">
+          <Key>
+            <PropertyRef Name="PkOrden" />
+          </Key>
+          <Property Name="PkOrden" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Mesa" Type="Int32" Nullable="false" />
+          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Total" Type="Double" />
+          <NavigationProperty Name="Pedido" Relationship="CafeteriaPacoModel.FK_Pedido_Orden" FromRole="Orden" ToRole="Pedido" />
+        </EntityType>
+        <EntityType Name="Pedido">
+          <Key>
+            <PropertyRef Name="PkPedido" />
+          </Key>
+          <Property Name="PkPedido" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Platillo" Type="Int32" Nullable="false" />
+          <Property Name="Orden" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Orden1" Relationship="CafeteriaPacoModel.FK_Pedido_Orden" FromRole="Pedido" ToRole="Orden" />
+          <NavigationProperty Name="Platillo1" Relationship="CafeteriaPacoModel.FK_Pedido_Platillo" FromRole="Pedido" ToRole="Platillo" />
+        </EntityType>
+        <EntityType Name="Platillo">
+          <Key>
+            <PropertyRef Name="PkPlatillo" />
+          </Key>
+          <Property Name="PkPlatillo" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Precio" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <NavigationProperty Name="Pedido" Relationship="CafeteriaPacoModel.FK_Pedido_Platillo" FromRole="Platillo" ToRole="Pedido" />
+        </EntityType>
+        <Association Name="FK_Pedido_Orden">
+          <End Role="Orden" Type="CafeteriaPacoModel.Orden" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Pedido" Type="CafeteriaPacoModel.Pedido" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orden">
+              <PropertyRef Name="PkOrden" />
+            </Principal>
+            <Dependent Role="Pedido">
+              <PropertyRef Name="Orden" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pedido_Platillo">
+          <End Role="Platillo" Type="CafeteriaPacoModel.Platillo" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Pedido" Type="CafeteriaPacoModel.Pedido" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Platillo">
+              <PropertyRef Name="PkPlatillo" />
+            </Principal>
+            <Dependent Role="Pedido">
+              <PropertyRef Name="Platillo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="CafeteriaPacoModelStoreContainer" CdmEntityContainer="CafeteriaPacoEntities">
+          <EntitySetMapping Name="Orden">
+            <EntityTypeMapping TypeName="CafeteriaPacoModel.Orden">
+              <MappingFragment StoreEntitySet="Orden">
+                <ScalarProperty Name="PkOrden" ColumnName="PkOrden" />
+                <ScalarProperty Name="Mesa" ColumnName="Mesa" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Pedido">
+            <EntityTypeMapping TypeName="CafeteriaPacoModel.Pedido">
+              <MappingFragment StoreEntitySet="Pedido">
+                <ScalarProperty Name="PkPedido" ColumnName="PkPedido" />
+                <ScalarProperty Name="Platillo" ColumnName="Platillo" />
+                <ScalarProperty Name="Orden" ColumnName="Orden" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Platillo">
+            <EntityTypeMapping TypeName="CafeteriaPacoModel.Platillo">
+              <MappingFragment StoreEntitySet="Platillo">
+                <ScalarProperty Name="PkPlatillo" ColumnName="PkPlatillo" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Precio" ColumnName="Precio" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
