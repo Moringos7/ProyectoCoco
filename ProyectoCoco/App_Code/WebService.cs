@@ -22,7 +22,7 @@ public class WebService : System.Web.Services.WebService {
         //InitializeComponent(); 
         ControladorOrden = new ControladorOrden();
         ControladorPlatillo = new ControladorPlatillo();
-        ControladorPedidi = new ControladorPedido();
+        ControladorPedido = new ControladorPedido();
     }
     //CREAR ORDEN
     [WebMethod]
