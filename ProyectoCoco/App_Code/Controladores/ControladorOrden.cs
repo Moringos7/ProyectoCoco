@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -27,10 +27,24 @@ public class ControladorOrden
         BD.SaveChanges();
     }
     //READ ORDEN
-    public List<Orden> DevolverTablaOrden()
+    public List<ModeloOrden> DevolverTablaOrden()
     {
-        List<Orden> TablaOrden = new List<Orden>();       
-        TablaOrden = BD.Orden.ToList<Orden>();
+        //Lista que se enviara, adaptada para ser leida por un [WebMethod]
+        List<ModeloOrden> TablaOrden = new List<ModeloOrden>();
+        //Lista generada por el modelo Entity, no puede ser leida por un [WebMethod]
+        List<Orden> TablaOrdenEntity = new List<Orden>();
+        TablaOrdenEntity = BD.Orden.ToList<Orden>();
+        //Por cada registro de la tabla "Entity" se vuelca la informacion a un objeto leible (Sin ICollection)
+        TablaOrdenEntity.ForEach(O =>
+            {
+                ModeloOrden Orden = new ModeloOrden();
+                Orden.PkOrden = O.PkOrden;
+                Orden.Mesa = O.Mesa;
+                Orden.Fecha = O.Fecha;
+                Orden.Total = O.Total;
+                TablaOrden.Add(Orden);
+            }
+            );
         return TablaOrden;
     }
     //UPDATE ORDEN
