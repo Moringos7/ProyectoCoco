@@ -17,5 +17,5 @@ public class ModeloOrden
     public int PkOrden { get; set; }
     public int Mesa { get; set; }
     public System.DateTime Fecha { get; set; }
-    public double Total { get; set; }
+    public Nullable<double> Total { get; set; }
 }
