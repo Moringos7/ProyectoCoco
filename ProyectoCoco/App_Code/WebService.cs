@@ -93,4 +93,39 @@ public class WebService : System.Web.Services.WebService {
     {
         ControladorPlatillo.BorrarPlatillo(PkPlatillo);
     }
+        //CREAR PEDIDO
+    [WebMethod]
+    public void CrearPedido(int Platillo, int Orden)
+    {
+        Pedido Pedido = new Pedido()
+        {
+            Platillo=Platillo,
+            Orden=Orden
+        };
+        ControladorPedido.CrearPedido(Pedido);   
+    }
+    //UPDATE PEDIDO
+    [WebMethod]
+    public void ModificarPedido(int PkPedido, int Platillo, int Orden)
+    {
+        Pedido Pedido = new Pedido()
+        {
+            Platillo = Platillo,
+            Orden = Orden
+        };
+        ControladorPedido.ModificarPedido(PkPedido, Pedido);
+    }
+    //READ PEDIDO
+    public List<Pedido> DevolverTablaPedido()
+    {
+        List<Pedido> TablaPedido = new List<Pedido>();
+        TablaPedido = ControladorPedido.DevolverTablaPedido();
+        return TablaPedido;
+    }
+    //DELETE PEDIDO
+    [WebMethod]
+    public void BorrarPedido(int PkPedido)
+    {
+        ControladorPedido.BorrarPedido(PkPedido);
+    }
 }
