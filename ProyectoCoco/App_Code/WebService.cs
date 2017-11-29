@@ -15,12 +15,14 @@ using Modelos;
 public class WebService : System.Web.Services.WebService {
     ControladorOrden ControladorOrden;
     ControladorPlatillo ControladorPlatillo;
+    ControladorPedido ControladorPedido;
     public WebService () {
 
         //Elimine la marca de comentario de la línea siguiente si utiliza los componentes diseñados 
         //InitializeComponent(); 
         ControladorOrden = new ControladorOrden();
         ControladorPlatillo = new ControladorPlatillo();
+        ControladorPedidi = new ControladorPedido();
     }
     //CREAR ORDEN
     [WebMethod]
