@@ -1,0 +1,5 @@
+c:\users\maryf\documents\visual studio 2012\Projects\Vistas\Vistas\bin\Vistas.dll
+c:\users\maryf\documents\visual studio 2012\Projects\Vistas\Vistas\bin\Vistas.pdb
+c:\users\maryf\documents\visual studio 2012\Projects\Vistas\Vistas\obj\Debug\Vistas.csprojResolveAssemblyReference.cache
+c:\users\maryf\documents\visual studio 2012\Projects\Vistas\Vistas\obj\Debug\Vistas.dll
+c:\users\maryf\documents\visual studio 2012\Projects\Vistas\Vistas\obj\Debug\Vistas.pdb

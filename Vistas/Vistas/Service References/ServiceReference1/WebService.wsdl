@@ -1,0 +1,525 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="CrearOrden">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="Mesa" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="Fecha" type="s:dateTime" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CrearOrdenResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="DevolverTablaOrden">
+        <s:complexType />
+      </s:element>
+      <s:element name="DevolverTablaOrdenResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="DevolverTablaOrdenResult" type="tns:ArrayOfModeloOrden" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfModeloOrden">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ModeloOrden" nillable="true" type="tns:ModeloOrden" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ModeloOrden">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="PkOrden" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="Mesa" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="Fecha" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="Total" nillable="true" type="s:double" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ModificarOrden">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="PkOrden" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="Mesa" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="Fecha" type="s:dateTime" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ModificarOrdenResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="BorrarOrden">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="PkOrden" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="BorrarOrdenResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="CrearPlatillo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Nombre" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="Precio" type="s:decimal" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CrearPlatilloResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="DevolverTablaPlatillo">
+        <s:complexType />
+      </s:element>
+      <s:element name="DevolverTablaPlatilloResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="DevolverTablaPlatilloResult" type="tns:ArrayOfModeloPlatillo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfModeloPlatillo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ModeloPlatillo" nillable="true" type="tns:ModeloPlatillo" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ModeloPlatillo">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="PkPlatillo" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Nombre" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Precio" type="s:decimal" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ModificarPlatillo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="PkPlatillo" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="Nombre" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="Precio" type="s:decimal" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ModificarPlatilloResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="BorrarPlatillo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="PkPlatillo" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="BorrarPlatilloResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="CrearPedido">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="Platillo" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="Orden" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CrearPedidoResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="ModificarPedido">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="PkPedido" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="Platillo" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="Orden" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ModificarPedidoResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="DevolverTablaPedido">
+        <s:complexType />
+      </s:element>
+      <s:element name="DevolverTablaPedidoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="DevolverTablaPedidoResult" type="tns:ArrayOfModeloPedido" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfModeloPedido">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ModeloPedido" nillable="true" type="tns:ModeloPedido" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ModeloPedido">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="PkPedido" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="Platillo" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="Orden" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="BorrarPedido">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="PkPedido" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="BorrarPedidoResponse">
+        <s:complexType />
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="CrearOrdenSoapIn">
+    <wsdl:part name="parameters" element="tns:CrearOrden" />
+  </wsdl:message>
+  <wsdl:message name="CrearOrdenSoapOut">
+    <wsdl:part name="parameters" element="tns:CrearOrdenResponse" />
+  </wsdl:message>
+  <wsdl:message name="DevolverTablaOrdenSoapIn">
+    <wsdl:part name="parameters" element="tns:DevolverTablaOrden" />
+  </wsdl:message>
+  <wsdl:message name="DevolverTablaOrdenSoapOut">
+    <wsdl:part name="parameters" element="tns:DevolverTablaOrdenResponse" />
+  </wsdl:message>
+  <wsdl:message name="ModificarOrdenSoapIn">
+    <wsdl:part name="parameters" element="tns:ModificarOrden" />
+  </wsdl:message>
+  <wsdl:message name="ModificarOrdenSoapOut">
+    <wsdl:part name="parameters" element="tns:ModificarOrdenResponse" />
+  </wsdl:message>
+  <wsdl:message name="BorrarOrdenSoapIn">
+    <wsdl:part name="parameters" element="tns:BorrarOrden" />
+  </wsdl:message>
+  <wsdl:message name="BorrarOrdenSoapOut">
+    <wsdl:part name="parameters" element="tns:BorrarOrdenResponse" />
+  </wsdl:message>
+  <wsdl:message name="CrearPlatilloSoapIn">
+    <wsdl:part name="parameters" element="tns:CrearPlatillo" />
+  </wsdl:message>
+  <wsdl:message name="CrearPlatilloSoapOut">
+    <wsdl:part name="parameters" element="tns:CrearPlatilloResponse" />
+  </wsdl:message>
+  <wsdl:message name="DevolverTablaPlatilloSoapIn">
+    <wsdl:part name="parameters" element="tns:DevolverTablaPlatillo" />
+  </wsdl:message>
+  <wsdl:message name="DevolverTablaPlatilloSoapOut">
+    <wsdl:part name="parameters" element="tns:DevolverTablaPlatilloResponse" />
+  </wsdl:message>
+  <wsdl:message name="ModificarPlatilloSoapIn">
+    <wsdl:part name="parameters" element="tns:ModificarPlatillo" />
+  </wsdl:message>
+  <wsdl:message name="ModificarPlatilloSoapOut">
+    <wsdl:part name="parameters" element="tns:ModificarPlatilloResponse" />
+  </wsdl:message>
+  <wsdl:message name="BorrarPlatilloSoapIn">
+    <wsdl:part name="parameters" element="tns:BorrarPlatillo" />
+  </wsdl:message>
+  <wsdl:message name="BorrarPlatilloSoapOut">
+    <wsdl:part name="parameters" element="tns:BorrarPlatilloResponse" />
+  </wsdl:message>
+  <wsdl:message name="CrearPedidoSoapIn">
+    <wsdl:part name="parameters" element="tns:CrearPedido" />
+  </wsdl:message>
+  <wsdl:message name="CrearPedidoSoapOut">
+    <wsdl:part name="parameters" element="tns:CrearPedidoResponse" />
+  </wsdl:message>
+  <wsdl:message name="ModificarPedidoSoapIn">
+    <wsdl:part name="parameters" element="tns:ModificarPedido" />
+  </wsdl:message>
+  <wsdl:message name="ModificarPedidoSoapOut">
+    <wsdl:part name="parameters" element="tns:ModificarPedidoResponse" />
+  </wsdl:message>
+  <wsdl:message name="DevolverTablaPedidoSoapIn">
+    <wsdl:part name="parameters" element="tns:DevolverTablaPedido" />
+  </wsdl:message>
+  <wsdl:message name="DevolverTablaPedidoSoapOut">
+    <wsdl:part name="parameters" element="tns:DevolverTablaPedidoResponse" />
+  </wsdl:message>
+  <wsdl:message name="BorrarPedidoSoapIn">
+    <wsdl:part name="parameters" element="tns:BorrarPedido" />
+  </wsdl:message>
+  <wsdl:message name="BorrarPedidoSoapOut">
+    <wsdl:part name="parameters" element="tns:BorrarPedidoResponse" />
+  </wsdl:message>
+  <wsdl:portType name="WebServiceSoap">
+    <wsdl:operation name="CrearOrden">
+      <wsdl:input message="tns:CrearOrdenSoapIn" />
+      <wsdl:output message="tns:CrearOrdenSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DevolverTablaOrden">
+      <wsdl:input message="tns:DevolverTablaOrdenSoapIn" />
+      <wsdl:output message="tns:DevolverTablaOrdenSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ModificarOrden">
+      <wsdl:input message="tns:ModificarOrdenSoapIn" />
+      <wsdl:output message="tns:ModificarOrdenSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="BorrarOrden">
+      <wsdl:input message="tns:BorrarOrdenSoapIn" />
+      <wsdl:output message="tns:BorrarOrdenSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CrearPlatillo">
+      <wsdl:input message="tns:CrearPlatilloSoapIn" />
+      <wsdl:output message="tns:CrearPlatilloSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DevolverTablaPlatillo">
+      <wsdl:input message="tns:DevolverTablaPlatilloSoapIn" />
+      <wsdl:output message="tns:DevolverTablaPlatilloSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ModificarPlatillo">
+      <wsdl:input message="tns:ModificarPlatilloSoapIn" />
+      <wsdl:output message="tns:ModificarPlatilloSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="BorrarPlatillo">
+      <wsdl:input message="tns:BorrarPlatilloSoapIn" />
+      <wsdl:output message="tns:BorrarPlatilloSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CrearPedido">
+      <wsdl:input message="tns:CrearPedidoSoapIn" />
+      <wsdl:output message="tns:CrearPedidoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ModificarPedido">
+      <wsdl:input message="tns:ModificarPedidoSoapIn" />
+      <wsdl:output message="tns:ModificarPedidoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DevolverTablaPedido">
+      <wsdl:input message="tns:DevolverTablaPedidoSoapIn" />
+      <wsdl:output message="tns:DevolverTablaPedidoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="BorrarPedido">
+      <wsdl:input message="tns:BorrarPedidoSoapIn" />
+      <wsdl:output message="tns:BorrarPedidoSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="WebServiceSoap" type="tns:WebServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="CrearOrden">
+      <soap:operation soapAction="http://tempuri.org/CrearOrden" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DevolverTablaOrden">
+      <soap:operation soapAction="http://tempuri.org/DevolverTablaOrden" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ModificarOrden">
+      <soap:operation soapAction="http://tempuri.org/ModificarOrden" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BorrarOrden">
+      <soap:operation soapAction="http://tempuri.org/BorrarOrden" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CrearPlatillo">
+      <soap:operation soapAction="http://tempuri.org/CrearPlatillo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DevolverTablaPlatillo">
+      <soap:operation soapAction="http://tempuri.org/DevolverTablaPlatillo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ModificarPlatillo">
+      <soap:operation soapAction="http://tempuri.org/ModificarPlatillo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BorrarPlatillo">
+      <soap:operation soapAction="http://tempuri.org/BorrarPlatillo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CrearPedido">
+      <soap:operation soapAction="http://tempuri.org/CrearPedido" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ModificarPedido">
+      <soap:operation soapAction="http://tempuri.org/ModificarPedido" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DevolverTablaPedido">
+      <soap:operation soapAction="http://tempuri.org/DevolverTablaPedido" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BorrarPedido">
+      <soap:operation soapAction="http://tempuri.org/BorrarPedido" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="WebServiceSoap12" type="tns:WebServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="CrearOrden">
+      <soap12:operation soapAction="http://tempuri.org/CrearOrden" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DevolverTablaOrden">
+      <soap12:operation soapAction="http://tempuri.org/DevolverTablaOrden" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ModificarOrden">
+      <soap12:operation soapAction="http://tempuri.org/ModificarOrden" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BorrarOrden">
+      <soap12:operation soapAction="http://tempuri.org/BorrarOrden" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CrearPlatillo">
+      <soap12:operation soapAction="http://tempuri.org/CrearPlatillo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DevolverTablaPlatillo">
+      <soap12:operation soapAction="http://tempuri.org/DevolverTablaPlatillo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ModificarPlatillo">
+      <soap12:operation soapAction="http://tempuri.org/ModificarPlatillo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BorrarPlatillo">
+      <soap12:operation soapAction="http://tempuri.org/BorrarPlatillo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CrearPedido">
+      <soap12:operation soapAction="http://tempuri.org/CrearPedido" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ModificarPedido">
+      <soap12:operation soapAction="http://tempuri.org/ModificarPedido" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DevolverTablaPedido">
+      <soap12:operation soapAction="http://tempuri.org/DevolverTablaPedido" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BorrarPedido">
+      <soap12:operation soapAction="http://tempuri.org/BorrarPedido" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="WebService">
+    <wsdl:port name="WebServiceSoap" binding="tns:WebServiceSoap">
+      <soap:address location="http://localhost:12308/WebService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="WebServiceSoap12" binding="tns:WebServiceSoap12">
+      <soap12:address location="http://localhost:12308/WebService.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
