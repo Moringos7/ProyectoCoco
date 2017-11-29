@@ -31,6 +31,7 @@ public class ControladorPedido
         Temp.Orden = Pedido.Orden;
         BD.SaveChanges();
     }
+// READ PEDIDO
     public List<Pedido> DevolverTablaPedido()
     {
         List<Pedido> TablaPedido = new List<Pedido>();
@@ -38,7 +39,7 @@ public class ControladorPedido
         return TablaPedido;
     }
 
-    //DELETE ORDEN
+    //DELETE PEDIDO
     public void BorrarPedido(int PkPedido)
     {
         BD.Pedido.Remove(BD.Pedido.Find(PkPedido));
