@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -12,10 +12,10 @@ using Modelos;
 public class ControladorPedido
 {
     CafeteriaPacoEntities BD;
-	public ControladorPedido()
-	{
+    public ControladorPedido()
+    {
         BD = new CafeteriaPacoEntities();
-	}
+    }
     //CREATE PEDIDO
     public void CrearPedido(Pedido Pedido)
     {
@@ -31,11 +31,23 @@ public class ControladorPedido
         Temp.Orden = Pedido.Orden;
         BD.SaveChanges();
     }
-// READ PEDIDO
-    public List<Pedido> DevolverTablaPedido()
+    // READ PEDIDO
+    public List<ModeloPedido> DevolverTablaPedido()
     {
-        List<Pedido> TablaPedido = new List<Pedido>();
-        TablaPedido = BD.Pedido.ToList<Pedido>();
+        //Lista que se enviara, adaptada para ser leida por un [WebMethod]
+        List<ModeloPedido> TablaPedido = new List<ModeloPedido>();
+        //Lista generada por el modelo Entity, no puede ser leida por un [WebMethod]
+        List<Pedido> TablaPedidoEntity = new List<Pedido>();
+        TablaPedidoEntity = BD.Pedido.ToList<Pedido>();
+        //Por cada registro de la tabla "Entity" se vuelca la informacion a un objeto leible (Sin ICollection)
+        TablaPedidoEntity.ForEach(P =>
+        {
+            ModeloPedido Pedido = new ModeloPedido();
+            Pedido.PkPedido = P.PkPedido;
+            Pedido.Platillo = P.Platillo;
+            Pedido.Orden = P.Orden;
+            TablaPedido.Add(Pedido);
+        });
         return TablaPedido;
     }
 
