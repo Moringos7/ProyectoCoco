@@ -36,9 +36,10 @@ public class WebService : System.Web.Services.WebService {
         ControladorOrden.CrearOrden(Orden);
     }
     //READ ORDEN
-    public List<Orden> DevolverTablaOrden()
+    [WebMethod]
+    public List<ModeloOrden> DevolverTablaOrden()
     {
-        List<Orden> TablaOrden = new List<Orden>();
+        List<ModeloOrden> TablaOrden = new List<ModeloOrden>();
         TablaOrden = ControladorOrden.DevolverTablaOrden();
         return TablaOrden;
     }
@@ -72,9 +73,10 @@ public class WebService : System.Web.Services.WebService {
         ControladorPlatillo.CrearPlatillo(Platillo);
     }
     //READ Platillo
-    public List<Platillo> DevolverTablaPlatillo()
+    [WebMethod]
+    public List<ModeloPlatillo> DevolverTablaPlatillo()
     {
-        List<Platillo> TablaPlatillo = new List<Platillo>();
+        List<ModeloPlatillo> TablaPlatillo = new List<ModeloPlatillo>();
         TablaPlatillo = ControladorPlatillo.DevolverTablaPlatillo();
         return TablaPlatillo;
     }
@@ -118,9 +120,10 @@ public class WebService : System.Web.Services.WebService {
         ControladorPedido.ModificarPedido(PkPedido, Pedido);
     }
     //READ PEDIDO
-    public List<Pedido> DevolverTablaPedido()
+    [WebMethod]
+    public List<ModeloPedido> DevolverTablaPedido()
     {
-        List<Pedido> TablaPedido = new List<Pedido>();
+        List<ModeloPedido> TablaPedido = new List<ModeloPedido>();
         TablaPedido = ControladorPedido.DevolverTablaPedido();
         return TablaPedido;
     }
