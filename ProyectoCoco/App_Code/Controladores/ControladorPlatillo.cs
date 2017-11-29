@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -27,10 +27,22 @@ public class ControladorPlatillo
         BD.SaveChanges();
     }
     //READ Platillo
-    public List<Platillo> DevolverTablaPlatillo()
+    public List<ModeloPlatillo> DevolverTablaPlatillo()
     {
-        List<Platillo> TablaPlatillo = new List<Platillo>();
-        TablaPlatillo = BD.Platillo.ToList<Platillo>();
+        //Lista que se enviara, adaptada para ser leida por un [WebMethod]
+        List<ModeloPlatillo> TablaPlatillo = new List<ModeloPlatillo>();
+        //Lista generada por el modelo Entity, no puede ser leida por un [WebMethod]
+        List<Platillo> TablaPlatilloEntity = new List<Platillo>();
+        TablaPlatilloEntity = BD.Platillo.ToList<Platillo>();
+        //Por cada registro de la tabla "Entity" se vuelca la informacion a un objeto leible (Sin ICollection)
+        TablaPlatilloEntity.ForEach(P =>
+        {
+            ModeloPlatillo Platillo = new ModeloPlatillo();
+            Platillo.PkPlatillo = P.PkPlatillo;
+            Platillo.Nombre = P.Nombre;
+            Platillo.Precio = P.Precio;
+            TablaPlatillo.Add(Platillo);
+        });
         return TablaPlatillo;
     }
     //UPDATE Platillo
