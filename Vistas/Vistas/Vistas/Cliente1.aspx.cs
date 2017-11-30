@@ -1,58 +1,49 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
-using System.Web.UI.WebControls;
-using Cliente.ServiceReference1;
-
+using AplicacionWeb.ServiceReference1;
 namespace Cliente
 {
     public partial class Cliente1 : System.Web.UI.Page
     {
-        ServiceReference1.WebServiceSoapClient servicio = new WebServiceSoapClient();
-        List<ModeloPedido> Pedidos = new List<ModeloPedido>();
+        WebServiceSoapClient Servicio = new WebServiceSoapClient();
         int Orden;
         protected void Page_Load(object sender, EventArgs e)
         {
-            DropDownList1.DataSource = servicio.DevolverTablaPlatillo().ToList<ModeloPlatillo>().Select(p =>p.Nombre);
-            DropDownList1.DataBind();
-            Orden = servicio.DevolverTablaOrden().Select(o => o.PkOrden).Max()+1;
-            GridView1.DataSource = Pedidos;
-            GridView1.DataBind();
+            PostBackOptions OpcionesPB = new PostBackOptions(Button1);
+            OpcionesPB.AutoPostBack = false;
+            Orden = Servicio.DevolverTablaOrden().Select(o => o.PkOrden).Max() + 1;
             Label3.Text = Convert.ToString(Orden);
+            if (!Page.IsPostBack)
+            {
+                DropDownList1.DataSource = Servicio.DevolverTablaPlatillo().ToList<ModeloPlatillo>().Select(p => p.Nombre);
+                DropDownList1.DataBind();
+            }           
         }
 
         protected void Button1_Click(object sender, EventArgs e)
         {
-            int cantidad;
-            cantidad=Convert.ToInt32(TextBox1.Text);
-            ListBox1.Items.Add(DropDownList1.Text + "  "+ TextBox1.Text);
-
-
-            /*for (int y = 0; y < cantidad; y++)
+            int Cantidad = Convert.ToInt32(TextBox1.Text);
+            for (int i = 0; i < Cantidad; i++)
             {
-                ModeloPedido Temporal = new ModeloPedido();
-                int Platillo = servicio.DevolverTablaPlatillo().Where(P => P.Nombre == DropDownList1.Text).Select(P => P.PkPlatillo).FirstOrDefault();
-                Temporal.Platillo = Platillo;
-                Temporal.Orden = Orden;
-                Pedidos.Add(Temporal);
-            }*/
-            //GridView1.DataBind();
-            
-            if (servicio.DevolverTablaOrden().Select(O => O.PkOrden).Max() < Orden)
-            {
-                DateTime Fecha = new DateTime();
-                Fecha = DateTime.Now;
-                servicio.CrearOrden(Convert.ToInt32(DropDownList2.Text), Fecha);                
+                ListBox1.Items.Add(DropDownList1.SelectedValue.ToString());
             }
-            int Platillo = servicio.DevolverTablaPlatillo().Where(P => P.Nombre == DropDownList1.Text).Select(P => P.PkPlatillo).FirstOrDefault();
-            servicio.CrearPedido(Platillo, Orden);
         }
 
         protected void Button2_Click(object sender, EventArgs e)
         {
+            DateTime Fecha = new DateTime();
+            Fecha = DateTime.Now;
+            Servicio.CrearOrden(Convert.ToInt32(DropDownList2.Text), Fecha);
+            foreach (var Platillo in ListBox1.Items)
+            {
+                int PkPlatillo = Servicio.DevolverTablaPlatillo().Where(P => P.Nombre == Platillo.ToString()).Select(P => P.PkPlatillo).FirstOrDefault();
+                Servicio.CrearPedido(PkPlatillo, Orden);
+            }
             Page.Response.Redirect(Page.Request.Url.ToString(), true);
+            
         }
     }
 }
