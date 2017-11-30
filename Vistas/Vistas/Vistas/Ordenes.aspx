@@ -1,82 +1,57 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Ordenes.aspx.cs" Inherits="Vistas.Ordenes" %>
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Cliente1.aspx.cs" Inherits="Cliente.Cliente1" %>
 
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
-
 <head runat="server">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title></title>
-    <style>
-        #Ordenar 
-        {
-            background-color: #FFFFFF;
-            color: #000000;
-            border: 1px solid #CBCBBB;
+    <style type="text/css">
+        #Select1 {
+            height: 29px;
+            width: 131px;
         }
-        #Dropdownlist1 
+        #SelectMesa
         {
-            border: 1px solid #CBCBBB;
+            position: absolute;
+            right: 2000px;
         }
-        #Ordenar:hover
-        {
-            background-color: #A70000;
-            color: #FFFFFF;
-            border: 1px solid #A70000;
-            cursor: pointer;
-        }
-        .espacio 
-        {
-            padding-top: 10px;
-            font-family: Roboto;
-            text-align: center;
-        }
-        .espacio2
-        {
-            padding-top: 10px;
-            font-family: Roboto;
-            padding-left: 33%;
+        #Select2 {
+            position: absolute;
+            width: 197px;
         }
     </style>
 </head>
-
 <body>
-
-    <form id="form1" runat="server">
-
-        <div class="espacio">
-            <asp:Label ID="titulo"  runat="server" ForeColor="#A70000" Text="Ordenes" Font-Size="35px"></asp:Label>
-        </div>
+    <form id="form1" runat="server" align="center">
+    <div>
     
-        <div class="espacio2">
-            <asp:GridView  ID="GridView1" runat="server" Height="300px" Width="500px" CellPadding="4" ForeColor="#333333" GridLines="None" >
-                <AlternatingRowStyle BackColor="White" />
-                <FooterStyle BackColor="#990000" Font-Bold="True" ForeColor="White" />
-                <HeaderStyle BackColor="#990000" Font-Bold="True" ForeColor="White" />
-                <PagerStyle BackColor="#FFCC66" ForeColor="#333333" HorizontalAlign="Center" />
-                <RowStyle HorizontalAlign="Center" VerticalAlign="Middle" Wrap="False" BackColor="#FFFBD6" ForeColor="#333333" />
-                <SelectedRowStyle BackColor="#FFCC66" Font-Bold="True" ForeColor="Navy" />
-                <SortedAscendingCellStyle BackColor="#FDF5AC" />
-                <SortedAscendingHeaderStyle BackColor="#4D0000" />
-                <SortedDescendingCellStyle BackColor="#FCF6C0" />
-                <SortedDescendingHeaderStyle BackColor="#820000" />
-            </asp:GridView>
-        </div>
-
-        <div class="espacio"><asp:Label ID="Filtros" runat="server" Text="Filtros" Font-Size="20px"></asp:Label></div>
-        <div class="espacio"><asp:Button ID="Ordenar" runat="server" Text="Ordenar" OnClick="Ordenar_Click" Font-Size="Medium" Width="270px" Height="40px" /></div>
-        <div class="espacio"><asp:dropdownlist ID="Dropdownlist1" runat="server" OnSelectedIndexChanged="Dropdownlist1_SelectedIndexChanged" AutoPostBack="True" OnTextChanged="Dropdownlist1_SelectedIndexChanged" Font-Size="Large" Height="40px" Width="270px">
-            <asp:ListItem Value="0" Selected="True">Mesas</asp:ListItem>
-            <asp:ListItem Value="1">Mesa 1</asp:ListItem>
-            <asp:ListItem Value="2">Mesa 2</asp:ListItem>
-            <asp:ListItem Value="3">Mesa 3</asp:ListItem>
-            <asp:ListItem Value="4">Mesa 4</asp:ListItem>
-            <asp:ListItem Value="5">Mesa 5</asp:ListItem>
-            </asp:dropdownlist>
-        </div>
-
+    </div>
+        <p>
+            <asp:Label ID="Label1" runat="server" Font-Size="50px" ForeColor="#A70000" Text="Cliente"></asp:Label>
+        </p>
+        &nbsp;
+        Mesa:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <asp:DropDownList ID="DropDownList2" runat="server">
+      <asp:ListItem>1</asp:ListItem>
+      <asp:ListItem>2</asp:ListItem>
+      <asp:ListItem>3</asp:ListItem>
+      <asp:ListItem>4</asp:ListItem>
+      <asp:ListItem>5</asp:ListItem>
+        </asp:DropDownList>
+        &nbsp;</div>
+        <p>
+            <asp:DropDownList ID="DropDownList1" runat="server">
+            </asp:DropDownList>
+            <asp:TextBox ID="TextBox1" runat="server" Width="31px">1</asp:TextBox>
+            <asp:Label ID="Label2" runat="server" Text="Numero De orden:"></asp:Label>
+            <asp:Label ID="Label3" runat="server" Text="" style="position:relative;left: 10px;"></asp:Label>
+            </p>
+            <div>
+                <asp:Button ID="Button1" runat="server" Height="40px" OnClick="Button1_Click" Text="Cargar" Width="106px" UseSubmitBehavior="False" CausesValidation="False" style="position:relative; left:0px;"/>        
+                <asp:Button ID="Button2" runat="server" Height="73px" Text="Ordenar" Width="111px" OnClick="Button2_Click" style="position:relative; left:0px; top: 50px"/>
+                <asp:ListBox ID="ListBox1" runat="server" Height="114px" Width="194px" style="position:relative; right:0px;"></asp:ListBox>
+            </div>
     </form>
-
-</body>
-
+    </body>
 </html>
