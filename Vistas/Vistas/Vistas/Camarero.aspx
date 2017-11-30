@@ -8,11 +8,12 @@
 </head>
     <style>
         body {
-            font-family: Roboto;
+            font-family:Roboto;
         }
         h1 {
             text-align: center;
             font-size: 50px;
+            color: #A70000;
         }
         .Buscador {
             display: block;
@@ -27,8 +28,8 @@
             font-size: 20px;
             list-style: none;
         }
-        .DatosI ul li{
-            
+        .DatosI{
+            color: black;
         }
         .Tabla {
             width: 45%;
@@ -71,6 +72,9 @@
         .auto-style2 {
             height: 94px;
         }
+        asp {
+            text-align: center;
+        }
                
     </style>
 <body>
@@ -79,8 +83,8 @@
 
         <div class="Buscador">
             <p>
-                <asp:TextBox ID="TextBoxCama" runat="server" Height="21px" Width="142px"></asp:TextBox>
-                <asp:Button ID="ButtonF" runat="server" Height="27px" Text="Buscar" Width="82px" Name="Buscar" OnClick="ButtonF_Click" />
+                <asp:TextBox ID="TextBoxCama" runat="server" Font-Size="20px" Height="35px" Width="142px"></asp:TextBox>
+                <asp:Button ID="ButtonF" runat="server" Font-Size="20px" Height="43px" Text="Buscar" Width="82px" Name="Buscar" OnClick="ButtonF_Click" />
             </p>
         </div>
         <div class="DatosI">
@@ -92,7 +96,7 @@
         <div class="Tabla">
             <table>
                 <tr>
-                    <td colspan="4" style="border-bottom: 1px black solid; border-left: 1px solid black;">Orden</td>
+                    <td colspan="4" style="background-color: #A70000;border-bottom: 1px black solid;color: white ;border-left: 1px solid black; font-size: 30px;">Orden</td>
                 </tr>
                 <tr>
                     <td style=" border-left: 1px solid black;" class="auto-style1">Cantidad</td>
@@ -102,18 +106,18 @@
                 </tr>
                 <tr>
                     <td style=" border-left: 1px solid black;" class="auto-style2"><!--Cantidad-->
-                        <asp:ListBox ID="ListCantidad" runat="server"></asp:ListBox>                       
+                        <asp:ListBox ID="ListCantidad" runat="server" Font-Size="20px"></asp:ListBox>                       
                     </td>
                     <td class="auto-style2"> <!--Platillo-->
-                        <asp:ListBox ID="ListPlatillo" runat="server"></asp:ListBox>
+                        <asp:ListBox ID="ListPlatillo" runat="server" Width="224px" Font-Size="20px"></asp:ListBox>
                     </td>
                     <td class="auto-style2"><!--Precio Unitario-->
-                        <asp:ListBox ID="ListPrecio" runat="server"></asp:ListBox>                        
+                        <asp:ListBox ID="ListPrecio" runat="server" Font-Size="20px"></asp:ListBox>                        
                     </td>
                     <td class="auto-style2"><!--Subtotal-->
-                       <asp:ListBox ID="ListSubtotal" runat="server"></asp:ListBox>                        
+                       <asp:ListBox ID="ListSubtotal" runat="server" Font-Size="20px"></asp:ListBox>                        
                     </td>
-                </tr>
+                </tr> 
                 <tr>
                     <td style="border-left: 1px solid white; border-bottom: 1px solid white; border-right: 1px solid white;"></td>
                     <td style="border-color: white; border-right: 1px solid black;"></td>

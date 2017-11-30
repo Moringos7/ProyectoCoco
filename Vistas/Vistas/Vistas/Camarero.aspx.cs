@@ -79,7 +79,8 @@ namespace Vista
             {
                 Fecha = Ordenes.Where(J => J.PkOrden == Folio).Select(J => J.Fecha).FirstOrDefault();
                 Total = Ordenes.Where(J => J.PkOrden == Folio).Select(J => J.Total).FirstOrDefault();
-                LFecha.Text = Convert.ToString(Fecha);
+                string SFecha = Convert.ToString(Fecha);
+                LFecha.Text = SFecha.Remove(10, 15);
                 LMesa.Text = Convert.ToString(Mesa);
                 LTotal.Text = "$" + Convert.ToString(Total);
             }
