@@ -26,6 +26,12 @@ namespace Vista
         }
         protected void ButtonF_Click(object sender, EventArgs e)
         {
+            List<ModeloOrden> ListaOrden = new List<ModeloOrden>();
+            List<int> repetidos = new List<int>();
+            ModeloOrden Orden = new ModeloOrden();
+            ModeloPedido Pedido = new ModeloPedido();
+            ModeloPlatillo Platillo = new ModeloPlatillo();
+
             //Variables Orden
             int Folio;
             int Mesa;
@@ -33,22 +39,15 @@ namespace Vista
             Nullable<double> Total;
             //Variables Pedido
             int pkPedido;
-            int platilloP;
-            int OrdenP;
             //Variables Platillo
-            string Nombre;
-            float Precio;
             Folio = Convert.ToInt32(TextBoxCama.Text);
-            ModeloOrden Orden = new ModeloOrden();
-            ModeloPedido Pedido = new ModeloPedido();
-            ModeloPlatillo Platillo = new ModeloPlatillo();
-
-            List<ModeloOrden> ListaOrden = new List<ModeloOrden>();
+            ListPrecio.Items.Clear();
+            ListPlatillo.Items.Clear();
+            ListSubtotal.Items.Clear();
+            ListCantidad.Items.Clear();            
             Mesa = Ordenes.Where(J => J.PkOrden == Folio).Select(J=> J.Mesa).FirstOrDefault();
-           
             pkPedido = Pedidos.Select(M => M.PkPedido).Max();
             var PlatillosFolio = Pedidos.Where(M => M.Orden == Folio).Select(J => J.Platillo).ToList<int>();
-            List<int> repetidos = new List<int>();
             foreach (int plat in PlatillosFolio)
             {
                 foreach (var Jplatillo in Platillos)
@@ -67,23 +66,9 @@ namespace Vista
                             ListSubtotal.Items.Add(Convert.ToString(cant * Jplatillo.Precio));
                             ListCantidad.Items.Add(Convert.ToString(cant));
                         }
-                        
-
                     }
                 }
             }
-
-
-         
-
-            
-            
-            
-            
-            
-            
-            
-            
             if (Mesa == 0)
             { 
                 LFecha.Text = "";
@@ -98,10 +83,6 @@ namespace Vista
                 LMesa.Text = Convert.ToString(Mesa);
                 LTotal.Text = "$" + Convert.ToString(Total);
             }
-
-            //TextBoxCama.Text += Convert.ToString();
-
         }
-
     }
 }
